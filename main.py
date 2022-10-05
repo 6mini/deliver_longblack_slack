@@ -18,9 +18,10 @@ def main():
 
     for i in soup2.select_one(".note-content").select("p")[1:]:
         try:
-            if i.select_one("strong").text == " ":
+            strong = i.select_one("strong").text
+            if strong == " ":
                 pass
-            elif '“' in i.select_one("strong").text:
+            elif '“' in strong:
                 pass
             elif i.select_one("a"):
                 pass
