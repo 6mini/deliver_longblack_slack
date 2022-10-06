@@ -16,7 +16,16 @@ def main():
 
     soup2 = BeautifulSoup(requests.get(get_today_href).text, 'html.parser')
 
-    for i in soup2.select_one(".note-content").select("p")[1:]:
+    content = soup2.select_one(".note-content").select("p")
+    
+    if "C" in content[0].text:
+        link_text = "오늘의 롱블랙 노트, 읽으러 가보지 않으실래요?"
+    elif "L" in content[0].text:
+        link_text = "오늘의 롱블랙 노트, 읽으러 가보지 않을래?"
+    else:
+        link_text = "오늘의 롱블랙 노트, 함께 읽으러 가보시겠어요?"
+    
+    for i in content[1:]:
         try:
             strong = i.select_one("strong").text
             if strong == " ":
@@ -43,7 +52,7 @@ def main():
                             "type": "section",
                             "text": {
                                 "type": "mrkdwn",
-                                "text": f"<{get_today_href}|오늘의 롱블랙 노트, 읽으러 가보지 않을래?>"
+                                "text": f"<{get_today_href}|{link_text}>"
                             }
                         })
 
