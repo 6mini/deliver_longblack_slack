@@ -40,7 +40,8 @@ def main():
             pass
         
         if i.get("style") == "margin-left: 40px;":
-            text = i.text.replace(".*", ".\n * ")
+            text = i.text.replace(".**", ".\n ** ")
+            text = text.replace(".*", ".\n * ")
             message.append({
                             "type": "section",
                             "text": {
